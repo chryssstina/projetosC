@@ -27,7 +27,7 @@ int pares(int v[]){
                     par[pares] = v[i];   
                     pares++; 
                   //verifica se o número é par e o atribui ao vetor par[]
-                  //'pares' funciona como o índice so vetor par[]
+                  //'pares' funciona como o índice do vetor par[]
                 } 
         }
   
