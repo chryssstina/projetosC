@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+
 // soma os números do vetor
 float soma(int v[]){
         int i, somaV=0;
@@ -27,7 +28,7 @@ int pares(int v[]){
                     par[pares] = v[i];   
                     pares++; 
                   //verifica se o número é par e o atribui ao vetor par[]
-                  //'pares' funciona como o índice do vetor par[]
+                  //'pares' funciona como o índice so vetor par[]
                 } 
         }
   
@@ -73,9 +74,12 @@ int entrada_inversa(int v[]){
 
 // função pricipal - recebe o vetor
 void main(){
+  
         int v[6];
         int i;
-
+        char continuar = '\0';
+  
+  while (continuar != 'n' && continuar != 'N'){
         printf("Digite seis números: \n");
         for (i=0; i<6; i++){
                 printf("Nº %d de 6: ", i+1);
@@ -87,4 +91,11 @@ void main(){
         printf("Soma dos elementos do vetor = %.1f \n", soma(v));
         printf("Média dos elementos do vetor = %.2f \n", media(v));
         printf(pares(v));
+     
+  printf("\nDeseja continuar? (s/n)\n");
+  scanf(" %c", &continuar);
+    if(continuar == 'n' || continuar == 'N'){
+      printf("Programa encerrado!");
+    }
   }
+}
