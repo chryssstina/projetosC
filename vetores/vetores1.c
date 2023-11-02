@@ -1,101 +1,106 @@
 #include <stdio.h>
+#include <stdbool.h>
+#define MAX 50 
+//define o tamanho máximo do vetor como 50
 
-
-// soma os números do vetor
-float soma(int v[]){
-        int i, somaV=0;
-
-        for(i=0; i<6; i++){
-                somaV = somaV + v[i];
+//função para calcular os elementos válidos (até o usuário digitar 0)
+int tamanho(int numeros[]) {
+    int i, cont=0;
+  
+    for(i=0; i<MAX; i++){
+        if(numeros[i]>0){
+            cont++;
+        }else{
+            break; 
         }
-        return somaV;
-}
-
-// calcula a média dos números do vetor
-float media(int v[]){
-  
-        float mediaV;
-        mediaV = soma(v)/6;
-        return mediaV;
-}
- 
-// mostra os números pares do vetor
-int pares(int v[]){
-        int par[6], i, pares=0;
-
-        for(i=0; i<6; i++){
-                if(v[i]%2 == 0){
-                    par[pares] = v[i];   
-                    pares++; 
-                  //verifica se o número é par e o atribui ao vetor par[]
-                  //'pares' funciona como o índice so vetor par[]
-                } 
-        }
-  
-        printf("Pares do vetor: ["); 
-        for (i=0; i< pares; i++){
-              if(i<pares-1){
-                   printf("%d,",par[i]);
-              }else{
-                   printf("%d] \n",par[i]);
-              }
-         
-        }
-}
-
-//exibe os números digitados em um vetor
-int entrada(int v[]){
-        int i;
-  
-        printf("\nVetor de entrada = [");
-        for(i=0; i<6; i++){
-             if(i<5){
-                    printf("%d,",v[i]);
-              }else{
-                    printf("%d] \n",v[i]);
-                  }
-       }
-}
-
-
-//exibe os números digitados em um novo vetor, mas na ordem inversa
-int entrada_inversa(int v[]){
-        int i;
-
-        printf("Vetor inverso = [");
-        for(i=5; i>=0; i--){
-           if(i>0){
-                  printf("%d,",v[i]);
-            }else{
-                  printf("%d] \n",v[i]);
-                }
-       }
-}
-
-// função pricipal - recebe o vetor
-void main(){
-  
-        int v[6];
-        int i;
-        char continuar = '\0';
-  
-  while (continuar != 'n' && continuar != 'N'){
-        printf("Digite seis números: \n");
-        for (i=0; i<6; i++){
-                printf("Nº %d de 6: ", i+1);
-                scanf("%d",&v[i]);
-        }
-  
-        printf(entrada(v));
-        printf(entrada_inversa(v));
-        printf("Soma dos elementos do vetor = %.1f \n", soma(v));
-        printf("Média dos elementos do vetor = %.2f \n", media(v));
-        printf(pares(v));
-     
-  printf("\nDeseja continuar? (s/n)\n");
-  scanf(" %c", &continuar);
-    if(continuar == 'n' || continuar == 'N'){
-      printf("Programa encerrado!");
     }
-  }
+    return cont;
 }
+
+
+//função para calcular a soma dos elementos do vetor
+float soma(int numeros[]) {
+    int i; 
+    int aux;
+    int *soma = &aux; //o ponteiro *soma armazena o endereço da variável auxiliar
+    *soma = 0; //atribuindo 0 ao endereço apontado por soma, ou seja, variável auxiliar
+  
+  
+    for (i = 0; i < tamanho(numeros) +1; i++){
+        *soma = *soma + numeros[i]; 
+       //Colocando a soma dentro do endereco onde soma aponta
+    }
+  
+    return *soma;
+} 
+
+//função para calcular a média
+float media(int numeros[]) {
+    int i;
+    float aux; 
+    float *media = &aux; 
+    *media = 0;
+  
+    //retornando as duas funções
+    *media = soma(numeros)/tamanho(numeros);
+    return *media;
+}
+
+
+//função para retirar elementos repetidos
+void nao_repetidos(int numeros[], int aux[]) {
+    int x,y,z=0; 
+    bool repete; //valor booleano
+    
+    for(x=0; x< tamanho(numeros)+1; x++){
+        repete = false;
+        for(y=x+1; y<tamanho(numeros)+1; y++){
+            if(numeros[x]==numeros[y]){
+               repete = true;
+               break;
+            }
+        }
+      
+        if(!repete){
+            aux[z] = numeros[x];
+            z++;
+        }   
+    }
+
+    printf("\nVetor sem elementos repetidos: [");
+    for(x=0; x<z; x++){
+      if(x<z-1){
+        printf("%d,",aux[x]);
+      }else{
+        printf("%d] \n",aux[x]);
+      }
+    }
+}
+
+  
+//função principal
+void main(){
+
+  int i;
+  int numeros[MAX];
+  int aux[MAX];
+
+  printf("Digite uma quantidade n de números para armazenar no vetor!\n\n");
+  printf("NOTA: - A quantidade máxima é 50;\n");
+  printf("      - Para encerrar digite zero.\n\n");
+
+  printf("Digite seus números armazenar no vetor: \n\n");
+  for (i=0; i<tamanho(numeros)+1; i++){
+    printf("Nº %d: ", i+1);
+    scanf("%d",&numeros[i]);
+  }
+
+  nao_repetidos(numeros, aux);
+  printf("Soma dos números do vetor = %.2f \n", soma(numeros)); 
+  printf("Quantidade de elementos válidos = %d \n", tamanho(numeros)); 
+  printf("Média dos números = %.2f \n", media(numeros)); 
+
+}
+
+
+
