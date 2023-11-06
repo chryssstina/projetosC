@@ -3,48 +3,67 @@
 #define MAX 50 
 //define o tamanho máximo do vetor como 50
 
-//função para calcular os elementos válidos (até o usuário digitar 0)
+// função para calcular os elementos válidos (até o usuário digitar 0)
 int tamanho(int numeros[]) {
-    int i, cont=0;
+   int i, cont = 0;
+   int *pont; 
+   pont = numeros;
   
-    for(i=0; i<MAX; i++){
-        if(numeros[i]>0){
-            cont++;
-        }else{
-            break; 
-        }
+  for (i = 0; i < MAX; i++) {
+    if (*pont > 0) {
+      cont++;
+      pont++;
+    } else {
+      break;
     }
-    return cont;
+  }
+  return cont;
 }
 
 
-//função para calcular a soma dos elementos do vetor
+
+
+
+
+// função para calcular a soma dos elementos do vetor
 float soma(int numeros[]) {
-    int i; 
-    int aux;
-    int *soma = &aux; //o ponteiro *soma armazena o endereço da variável auxiliar
-    *soma = 0; //atribuindo 0 ao endereço apontado por soma, ou seja, variável auxiliar
+  int i;
+  int soma = 0; 
   
+ //criando um ponteiro para numeros[]
+  int *pont; 
+  pont = numeros; 
   
-    for (i = 0; i < tamanho(numeros) +1; i++){
-        *soma = *soma + numeros[i]; 
-       //Colocando a soma dentro do endereco onde soma aponta
-    }
-  
-    return *soma;
-} 
-
-//função para calcular a média
-float media(int numeros[]) {
-    int i;
-    float aux; 
-    float *media = &aux; 
-    *media = 0;
-  
-    //retornando as duas funções
-    *media = soma(numeros)/tamanho(numeros);
-    return *media;
+  for (i = 0; i < tamanho(numeros) + 1; i++) {
+    soma = soma +  *pont;
+    pont ++;
+  }
+ //o ponteiro é incrementado para passar para o endereço ďe 
+ //memória do próximo elemento do vetor
+  return soma;
 }
+
+
+
+
+
+
+
+// função para calcular a média
+float media(int numeros[]) {
+
+  float media = 0;
+
+  // retornando as duas funções
+  media = soma(numeros) / tamanho(numeros);
+  return media;
+}
+
+
+
+
+
+
 
 
 //função para retirar elementos repetidos
@@ -77,7 +96,12 @@ void nao_repetidos(int numeros[], int aux[]) {
     }
 }
 
-  
+
+
+
+
+
+
 //função principal
 void main(){
 
