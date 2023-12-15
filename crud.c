@@ -53,14 +53,16 @@ int main(){
             }
             if(opcao=4){
                 excluirAbastecimento();
-            }if(opcao=5){
+            }
+            if(opcao=5){
                 listarAbastecimento();
             }
-    }
-}
+    } //fim do while
+} //fim da função main
 
-int ultimo_codigo(void)
-{
+
+
+int ultimo_codigo(void){
     int cod=0;
 
     for (int x=0; x < MAX; x++)
@@ -70,7 +72,7 @@ int ultimo_codigo(void)
     return cod;
 }
 
-
+//1. Adicionar abastecimento
 void adicionarAbastecimento(){
 
     int x,cod;
@@ -85,7 +87,7 @@ void adicionarAbastecimento(){
             //scanf("%d", &abastecimento_vetor[x].codigo);
 
             printf("Digite a data de abastecimento \n");
-            scanf("%d %d %d", &abastecimento_vetor[x].data.dia, &abastecimento.data.mes, &abastecimento.data.ano);
+            scanf("%d %d %d", &abastecimento_vetor[x].data.dia, &abastecimento_vetor[x].data.mes, &abastecimento_vetor[x].data.ano);
 
             printf("Digite o tipo de combustível (Gasolina/Alcool/Diesel)\n");
             fflush(stdin);
